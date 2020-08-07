@@ -1,0 +1,67 @@
+﻿@model List<SelectListItem>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <table>
+            @foreach(var m in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.RadioButton("Fruit", m.Value, m.Selected, new {@id = m.Value })
+                    </td>
+                    <td>
+                        @Html.Label(m.Text, new { @for = m.Value})
+                    </td>
+                </tr>
+            }
+        </table>
+
+
+        <div class="form-group">
+            <div class="col-form-legend">ViewBag doesn't require typecasting while retriving values from it...</div>
+                     
+                                 <div class="form-check">
+
+                                 @foreach (var m in Model)
+                                 {
+                                    <label class="radio-inline control-label">
+                                        @Html.RadioButton("Fruit", m.Value, m.Selected, new {@id = m.Value })
+                                        @Html.Label(m.Text, new { @for = m.Value})
+
+                                    </label> 
+                                 }
+                                 </div>
+        </div>
+
+
+        <br />
+        <input type="submit" value="Submit" />
+    }
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+</body>
+</html>
